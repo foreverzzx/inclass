@@ -178,7 +178,7 @@
   </div>
   <footer>
           <div class="pull-right">
-              <a href="https://colorlib.com">inclass</a>
+              <a href="#">inclass</a>
           </div>
           <div class="clearfix"></div>
   </footer>
@@ -302,7 +302,6 @@
      grequestPage--;
      read(grequestPage, gpageSize, gtype, gcondition);
    });
-
   </script>
   <!-- 查找 -->
   <script>
@@ -385,6 +384,7 @@ $("#check_all").click(function() {
     $('input[type="checkbox"]').each(function() {
         if ($(this).is(":checked")) {
             if ($(this).attr('id') != "check_all") {
+
                 checked_id = $(this).attr('id');
                 $.getJSON(getbaseurl() + "/api/classroom/deletes?ids=" + checked_id,
                   function(json)
@@ -409,20 +409,55 @@ $("#check_all").click(function() {
           // alert(id);
           // alert(id.substring(0,2));
           if(id.substring(0,2) == "bt"){
+            var content = '<div style="margin: 20px 60px"><form class="bs-example bs-example-form" role="form"><select class="form-control" id="building"><option>'+
+              '选择教学楼</option><option value="1">一教</option><option value="2">二教</option>' +
+            '<option value="3">三教</option><option value="4">四教</option><option value="5">五教</option>' +
+            '<option value="6">六教</option><option value="7">七教</option><option value="8">八教</option><option value="9">九教' +
+            '</option></select> </br>' +
+          '<select class="form-control" id="floor"><option>选择楼层</option><option value="1">1楼</option>' +
+            '<option value="2">2楼</option><option value="3">3楼</option><option value="4">4楼</option>' +
+            '<option value="5">5楼</option><option value="6">6楼</option></select></br>' +
+          '<div class="input-group"><span class="input-group-addon">座位数:</span>' +
+          '<input id="seat_num"  class="form-control" type="text" value="" /> </div>' +
+          '<div class="input-group"><span class="input-group-addon">教室号:</span>' +
+          '<input id="classroom_id" class="form-control" type="text" value=""/></div></form>';
             var classroom_id = id.substring(2);
             document.cookie = classroom_id;
             layer.open({
-              type: 2,
+              type: 1,
               title: '修改教室信息',
               shadeClose: true,
               shade: 0.8,
               area: ['390px', '80%'],
-              content: getbaseurl()+'/production/update_room.html', //iframe的url
-              end: function() {
-                  read(grequestPage, gpageSize, gtype, gcondition);
-              }
-            });
+              content: content, //iframe的url
+              btn: ['修改', '取消'],
+          yes: function(){
+              var building = $("#building").find("option:selected").val();
+              var floor = $("#floor").find("option:selected").val();
+              var max = $("#seat_num").val();
+              var classroom_id = $("#classroom_id").val();
+              $.getJSON(getbaseurl() + "/manage/classroom/update?id="+classroom_id + "&floor=" + floor + "&max=" + max + "&building=" + building + "&status=0",
+                function(json)
+                {
+                  if(json.status == 0)
+                  {
+                    alert("修改成功");
+                    read(grequestPage, gpageSize, gtype, gcondition);
+                  }else {
+                    alert("修改失败");
+                  }
+                }
+            );
+          },
+          btn2: function()
+          {
+            layer.close();
+          },
+          success: function(layero){
+            layero.find('.layui-layer-btn').css('text-align', 'center');
           }
+        });
+      }
     });
   </script>
   <script>
