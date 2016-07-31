@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>管理员页面</title>
+
+  <!-- Bootstrap core CSS -->
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/animate.min.css" rel="stylesheet">
+
+  <!-- Custom styling plus plugins -->
+  <link href="css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/maps/jquery-jvectormap-2.0.3.css" />
+  <link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
+<style media="screen">
+  span{
+    font-size: 15px;
+    margin-left: 15px;
+  }
+</style>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/nprogress.js"></script>
+
+  <!--[if lt IE 9]>
+        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+        <![endif]-->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+</head>
+<body class="nav-md" style="height:100%">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="index.html" class="site_title"><i class="fa fa-wrench"></i> <span>后台管理</span></a>
+          </div>
+          <!--<div class="clearfix"></div>-->
+
+           <!-- menu prile quick info -->
+          <!--<div class="profile">
+            <div class="profile_pic">
+              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <span></span>
+              <h2>John Doe</h2>
+            </div>
+          </div>-->
+          <!-- /menu prile quick info -->
+
+          <br />
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <br/> <br/>
+              <ul class="nav side-menu">
+                <li><a><i class="fa fa-cogs"></i> 终端管理 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="light_control.html">灯的状态及控制</a>
+                    </li>
+                    <li><a href="edit_light.html">灯的管理</a></li>
+                    <!-- <li><a href="del_light.html">删除灯</a></li> -->
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-edit"></i> 教室管理 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="open_room_info.html">开放教室信息</a>
+                    </li>
+                    <li><a href="free_room.html">未开放教室</a>
+                    </li>
+                    <li><a href="edit_room.html">教室管理</a>
+                    </li>
+                    </li>
+                  </ul>
+                </li>
+               <li><a ><i class="fa fa-envelope"></i> 通知消息 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="new_message.html">未读消息</a>
+                    </li>
+                    <li><a href="old_message.html">已读消息</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a id="expansion"><i class="fa fa-check"></i> 申请审核 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li ><a href="new_apply.html">查看申请</a>
+                    </li>
+                    <!-- <li><a href="all_apply.html">查看所有申请</a>
+                    </li> -->
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-user"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li><a href="edit_admin.html">管理员信息</a>
+                    </li>
+                    <!-- <li><a href="del_admin.html">删除管理员</a> </li> -->
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+
+        <div class="nav_menu">
+          <nav class="" role="navigation">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/img.jpg" alt="">John Doe
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <!-- <li><a href="javascript:;">个人信息</a>
+                  </li>
+                  <li>
+                    <a href="javascript:;">
+                      <span>设置</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:;">帮助</a>
+                  </li> -->
+                  <li>
+                    <a href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+
+
+      <!-- page content -->
+      <div class="right_col" role="main" style="min-height:500px">
+        <!-- <div class="row tile_count"> -->
+          <!-- <div class="form-group"> -->
+          <div class="row-fluid">
+            <table style="height:40px; margin:auto; text-align:center; font-size:15px;" class="table">
+              <tr>
+                <td>
+                   审核：
+                   <input id="pass" name="pass" type="radio" value="通过" /> 通过
+                   <input id="not_pass" name="not_pass" type="radio" value="不通过" /> 不通过
+                   &nbsp;&nbsp;
+                    <span id="room" style='display:none'>
+                      分配教室
+                      <input id="classroom_id" type="text" name="classroom_id" value="" />
+                      <button type="button" name="confirm" id="submit">确定</button>
+                    </span>
+                </td>
+              </tr>
+            </table>
+          <table style="margin:auto; text-align:center;" class="table table-striped table-bordered table-hover datatable">
+            <tbody>
+              <tr style="height:30px">
+                <td>
+                 <font size="6px">教室借用申请信息表</font>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="margin:auto;" class="table table-striped table-bordered table-hover datatable">
+            <tbody>
+              <tr style="height:40px;" class="odd gradeX">
+                <td>
+                  <div name="name" style="margin-top:5%; text-align:right; font-size:15px;">
+                     姓&nbsp;&nbsp;名
+
+                  </div>
+                </td>
+                <td>
+                  <span id="studentName"></span>
+                  <!-- <input style="margin-top:2%" type="text" name="name" value=""  /> -->
+                </td>
+                <td>
+                  <div name="number" style="margin-top:2%; text-align:right; font-size:15px;">
+                  学号
+                  </div>
+                </td>
+                <td>
+                  <span id="studentNumber"></span>
+                  <!-- <input style="margin-top:2%" type="text" name="stu_num" value=""  /> -->
+                </td>
+              </tr>
+              <tr style="height:40px;" class="odd gradeX">
+                <td style="width:11%;">
+                  <div name="classname" style="margin-top:2%; text-align:right; font-size:15px;">
+                  班&nbsp;&nbsp;级
+                  </div>
+                </td>
+                <td>
+                  <span id="studentClass"></span>
+                  <!-- <input style="margin-top:2%" type="text" name="class_num" value=""  /> -->
+                </td>
+                <td>
+                  <div name="cardnumber" style="margin-top:3%; text-align:right; font-size:15px;">
+                  身份证号
+                  </div>
+                </td>
+                <td>
+                  <span id="studentCard" style="font-size:15px;"></span>
+                  <!-- <input style="margin-top:2%" type="text" name="id_num" value=""  /> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="margin:auto;" class="table table-striped table-bordered table-hover datatable">
+            <tbody>
+              <tr style="height:40px;" class="odd gradeX">
+                <td style="width:11%;">
+                  <div style="margin-top:10%; text-align:center; font-size:15px;">
+                  申请时间
+                  </div>
+                </td>
+                <td>
+                  开始时间：
+                  <span id="startTime"></span>
+                  <!-- <input style="margin-top:1%" class="start_time" type="text" name="starttime" value="" /> -->
+                  &nbsp;&nbsp;&nbsp;
+                  结束时间：
+                  <span id="endTime"></span>
+                  <!-- <input style="margin-top:1%" class="end_time" type="text" name="endtime" value="" /> -->
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="margin-top:20%; text-align:center; font-size:15px;">
+                    申请理由
+                  </div>
+                </td>
+                <td>
+                  <textarea id="content" name="reason" style="width:60%; height:200px;">
+
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="text-align:center; font-size:15px;">
+                    证明材料
+                  </div>
+                </td>
+                <td>
+                  <a id="appendixAddr" font-size="15px">查看</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="margin:auto; text-align:center;" class="table table-striped table-bordered table-hover datatable">
+            <tbody>
+              <tr>
+                <td>
+                  &nbsp;&nbsp;
+                  <!-- <button style="height:25px; margin-top:6px;" type="button">提交</button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+  <footer>
+          <div class="pull-right">
+              <a href="https://colorlib.com">inclass</a>
+          </div>
+          <div class="clearfix"></div>
+  </footer>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="js/custom.js"></script>
+
+  <!-- flot js -->
+  <!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+  <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+  <script type="text/javascript" src="js/flot/jquery.flot.pie.js"></script>
+  <script type="text/javascript" src="js/flot/jquery.flot.orderBars.js"></script>
+  <script type="text/javascript" src="js/flot/jquery.flot.time.min.js"></script>
+  <script type="text/javascript" src="js/flot/date.js"></script>
+  <script type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
+  <script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
+  <script type="text/javascript" src="js/flot/curvedLines.js"></script>
+  <script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/jsontime.js"></script>
+  <!-- 获取数据 -->
+  <script>
+  function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+  var id = GetQueryString('id');
+  //图片地址传递
+  function add_pic_src(set_part, put_part)
+  {
+    $("#appendixAddr").attr("href", put_part);
+  }
+  //获取基本值
+  function add_basic(set_part, in_part){
+    $(set_part).html(in_part == null ? "" : in_part);
+  }
+  //获取参数
+  $(document).ready(function(){
+
+    // var id = document.cookie;
+    // alert(id);
+    $.getJSON(getbaseurl() + "/api/apply/get?id=" + id,
+      function(resp){
+        var status = resp.status;
+        if (status != 0) {
+          alert("未得到信息");
+        }
+        if (status == 0) {
+          if(resp.body.startTime != null)
+          {
+            var startTime = getalltime(resp.body.startTime.toString());
+          }
+          if(resp.body.endTime != null)
+          {
+            var endTime = getalltime(resp.body.endTime.toString());
+          }
+          //$("#studentNumber").html(resp.body.studentNumber);
+          add_basic("#studentNumber", resp.body.studentNumber);
+          add_basic("#studentName", resp.body.studentName);
+          add_basic("#studentClass", resp.body.studentClass);
+          add_basic("#studentCard", resp.body.studentCard);
+          add_basic("#content", resp.body.content);
+          add_basic("#startTime", startTime);
+          add_basic("#endTime", endTime);
+          //alert(resp.body.appendixAddr);
+          add_pic_src("#appendixAddr", resp.body.appendixAddr);
+        }
+    });
+    $("#expansion").click();
+  });
+  $("#pass").click(function(){
+  //  alert($(this).is("checked"));
+    if($("#not_pass").attr("checked", true))
+    {
+      $("#not_pass").attr("checked", false);
+    }
+    $("#room").show();
+  });
+  $("#not_pass").click(function(){
+    if($("#pass").attr("checked", true))
+    {
+      $("#pass").attr("checked", false);
+    }
+    $("#room").hide();
+  });
+  $("#submit").click(function(){
+    //alert($("#pass").is(":checked"));
+    // alert($("#not_pass").is("checked"));
+    var classroom = $("#classroom_id").val();
+    var check_status;
+    if ($("#pass").is(":checked")) {
+        check_status = 1;
+    }
+    else if($("#not_pass").is(":checked"))
+    {
+      check_status = 2;
+    }
+    else {
+      check_status = 0;
+    }
+    //alert(check_status);
+    //alert(classroom);
+    $.getJSON(getbaseurl() + "/api/apply/get?id=" + id + "&check_status=" + check_status + "&classroom_id=" + classroom,
+      function(json)
+      {
+        if(json.status)
+        {
+          alert("提交失败");
+        }
+      }
+    );
+
+  });
+   </script>
+  <!-- 提交数据 -->
+  <!-- <script>
+  function check_submit()
+  {
+    var myFormData = new FormData();
+    var pass = $("#pass").attr("checked");
+    var not_pass = $("#not_pass").attr("checked");
+    if (pass) {
+      myFormData.append("check_status", "1");
+    }else if (not_pass) {
+      myFormData.append("check_status", "2");
+    }else {
+      myFormData.append("check_status", "0");
+    }
+    var classroom_id = $("#classroom_id").val();
+    myFormData.append("classroom_id", classroom_id);
+    myFormData.append("id", "2");
+    $.ajax({
+      url: "../manage/apply/update",
+      type: "POST",
+      dataType: "json",
+      processData: false,
+      contentType: false,
+      success:function(resp){
+        if(resp.status == 0)
+        {
+          alert("审核成功");
+        }else{
+          alert("审核失败");
+        }
+      }
+    });
+  }
+  </script> -->
+  <script>
+    NProgress.done();
+  </script>
+  <!-- /datepicker -->
+  <!-- /footer content -->
+</body>
+
+</html>

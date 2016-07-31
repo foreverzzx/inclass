@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>修改教室信息</title>
+  </head>
+  <body>
+    <div>
+      <div style=" margin-top:10px; margin-left:100px;">
+        教学楼：
+        <select id="building">
+          <option>
+            选择教学楼
+          </option>
+          <option value="1">
+            一教
+          </option>
+          <option value="2">
+            二教
+          </option>
+          <option　value="3">
+            三教
+          <option>
+          <option value="4">
+            四教
+          </option>
+          <option　value="5">
+            五教
+          </option>
+          <option value="6">
+            六教
+          </option>
+          <option value="7">
+            七教
+          </option>
+          <option value="8">
+            八教
+          </option>
+          <option value="9">
+            九教
+          </option>
+        </select>
+      </div>
+      <div style="margin-top:10px;  margin-left:100px;">
+        楼&nbsp;&nbsp;&nbsp;&nbsp;层：
+        <select id="floor">
+          <option>
+            选择楼层
+          </option>
+          <option value="1">
+            1楼
+          </option>
+          <option value="2">
+            2楼
+          </option>
+          <option value="3">
+            3楼
+          </option>
+          <option value="4">
+            4楼
+          </option>
+          <option value="5">
+            5楼
+          </option>
+          <option value="6">
+            6楼
+          </option>
+        </select>
+      </div>
+      <div style="margin-left:100px; margin-top:10px;">
+        座位数：
+        <input id="max" style="width:100px" class="room_num" type="text" value="" />
+      </div>
+      <div style="margin-left:100px; margin-top:10px;">
+        教室号：
+        <input id="classroom_id" style="width:100px" class="room_num" type="text" value="" />
+      </div>
+      <div style="margin-left:120px; margin-top:10px;">
+        <input id="update" type="button" value="修改" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="取消"/>
+      </div>
+  </body>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script>
+  $("#update").click(function(){
+    var building = $("#building").find("option:selected").val();
+    var floor = $("#floor").find("option:selected").val();
+    var max = $("#max").val();
+    var classroom_id = $("#classroom_id").val();
+    $.getJSON(getbaseurl() + "/manage/classroom/update?id="+classroom_id + "&floor=" + floor + "&max=" + max + "&building=" + building + "&status=0",
+      function(json)
+      {
+        if(json.status == 0)
+        {
+          alert("修改成功");
+        }
+      });
+  });
+  $("#reset").click(function(){
+    $("#max").val("");
+    $("#classroom_id").val("");
+  });
+  </script>
+</html>
