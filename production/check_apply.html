@@ -355,6 +355,10 @@
 				    $("#room").show();
 				    $("#classroom_id").val(resp.body.classroomId);
           }
+          if(resp.body.checkStatus == 1)
+          {
+            $('#not_pass').attr('checked','chekced');
+          }
         }
     });
     $("#expansion").click();
@@ -387,7 +391,8 @@
     else if($("#not_pass").is(":checked"))
     {
       check_status = 2;
-      url = "&check_status=" + check_status;
+      classroom = 0;
+      url = "&check_status=" + check_status + "&classroom_id=" + classroom;
     }
     else {
       check_status = 0;
