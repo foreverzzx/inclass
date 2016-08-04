@@ -355,7 +355,7 @@
 				    $("#room").show();
 				    $("#classroom_id").val(resp.body.classroomId);
           }
-          if(resp.body.checkStatus == 1)
+          else if(resp.body.checkStatus == 2)
           {
             $('#not_pass').attr('checked','chekced');
           }
