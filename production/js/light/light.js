@@ -126,7 +126,7 @@
             {
               if(json.body[i] != null)
               {
-                var option = "<option value="+ json.body[i] +">" +json.body[i]+"教</option>"
+                var option = "<option value="+ json.body[i].building +">" +json.body[i].building+"教</option>"
                 $("#building").append(option);
               }
             }
@@ -167,7 +167,7 @@
 	      $(this).hide();
 	      //alert(id.substring(2));
 	      $("#off" + id.substring(2) + "").show();
-	      var mode = 1;
+	      var mode = 0;
 	      $.getJSON(getbaseurl()+"/api/light/updatemode?classroom_id=" + id.substring(2,6) + "&mode=" + mode,
 	        function(json)
 	        {
@@ -179,7 +179,7 @@
 	      {
 	        $(this).hide();
 	        $("#on" + id.substring(3) + "").show();
-	        var mode = 0;
+	        var mode = 1;
 	        $.getJSON(getbaseurl()+"/api/light/updatemode?classroom_id=" + id.substring(3,7) + "&mode=" + mode,
 	          function(json)
 	          {
