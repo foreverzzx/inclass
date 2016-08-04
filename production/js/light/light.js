@@ -79,7 +79,7 @@
                   + btn_content
                   + "</tr>";
                 $("#table").append(newRow);
-                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-success" : "btn btn-warning");
+                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-primary" : "btn btn-warning");
                num++;
               }
               else {
@@ -95,7 +95,7 @@
                   + btn_content
                   + "</tr>";
                 $("#table").append(newRow);
-                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-success" : "btn btn-warning");
+                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-primary" : "btn btn-warning");
                 num++;
               }
               // num++;
