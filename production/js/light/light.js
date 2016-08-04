@@ -17,6 +17,9 @@
           {
             $("#currentPage").html(json.body.currentPage);
             $("#totalPage").html(totalPage);
+          }else{
+            $("#currentPage").html("");
+            $("#totalPage").html("");
           }
           var light_color;
           var status;
