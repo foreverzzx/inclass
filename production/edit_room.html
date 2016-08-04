@@ -356,6 +356,7 @@
                 if(json.status == 0)
                 {
                   alert("添加成功");
+                  layer.closeAll();
                 }else {
                   alert("添加失败");
                 }
@@ -442,6 +443,7 @@ $("#check_all").click(function() {
                   if(json.status == 0)
                   {
                     alert("修改成功");
+                    layer.closeAll();
                     read(grequestPage, gpageSize, gtype, gcondition);
                   }else {
                     alert("修改失败");

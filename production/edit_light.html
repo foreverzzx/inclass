@@ -346,12 +346,12 @@
   <script>
       $("#add").click(function() {
         var content = '<form class="bs-example bs-example-form" role="form"><div style="margin:20px 60px" class="input-group">'+
-          '<span class="input-group-addon">教室号:</span>'+
-          '<input class="form-control" type="text" value="" />'+
+          '<span class="input-group-addon" >教室号:</span>'+
+          '<input class="form-control" type="text" value="" id="room_num"/>'+
         '</div>' +
         '<div style="margin:20px 60px" class="input-group">' +
           '<span class="input-group-addon">终端编号:</span>' +
-          '<input class="form-control" type="text" value="" />' +
+          '<input class="form-control" type="text" id="light_num" value="" />' +
         '</div></form>';
                   layer.open({
                       type: 1,
@@ -362,14 +362,18 @@
                       content: content, //iframe的url
                       btn: ['添加', '取消'],
                       yes:function(){
-                          var classroom_id = $(".room_num").val();
-                          var light_order = $(".light_num").val();
+                          var classroom_id = $("#room_num").val();
+                          var light_order = $("#light_num").val();
                           $.getJSON(getbaseurl()+"/api/light/add?classroom_id=" + classroom_id + "&light_order=" + light_order,
                             function(json)
                             {
                               if(json.status == 0)
                               {
                                 alert("添加成功");
+                                layer.closeAll();
+                              }
+                              else if(json.status == 6){
+                              	alert('终端已存在!');
                               }
                               else {
                                 alert("添加失败");
