@@ -170,8 +170,8 @@
                     <span id="room" style='display:none'>
                       分配教室
                       <input id="classroom_id" type="text" name="classroom_id" value="" />
-                      <button type="button" name="confirm" id="submit">确定</button>
                     </span>
+                    <button type="button" name="confirm" id="submit">确定</button>
                 </td>
               </tr>
             </table>
@@ -351,9 +351,13 @@
           add_pic_src("#appendixAddr", resp.body.appendixAddr);
           console.log(resp.body.checkStatus);
           if(resp.body.checkStatus == 1){
-				$('#pass').attr('checked','chekced');
-				$("#room").show();
-				$("#classroom_id").val(resp.body.classroomId);
+				    $('#pass').attr('checked','chekced');
+				    $("#room").show();
+				    $("#classroom_id").val(resp.body.classroomId);
+          }
+          else if(resp.body.checkStatus == 2)
+          {
+            $('#not_pass').attr('checked','chekced');
           }
         }
     });
@@ -379,12 +383,16 @@
     // alert($("#not_pass").is("checked"));
     var classroom = $("#classroom_id").val();
     var check_status;
+    var url;
     if ($("#pass").is(":checked")) {
         check_status = 1;
+        url = "&check_status=" + check_status + "&classroom_id=" + classroom;
     }
     else if($("#not_pass").is(":checked"))
     {
       check_status = 2;
+      classroom = "";
+      url = "&check_status=" + check_status + "&classroom_id=" + classroom;
     }
     else {
       check_status = 0;
@@ -392,7 +400,7 @@
     //alert(check_status);
     //alert(classroom);
     console.log(id);
-    $.getJSON(getbaseurl() + "/manage/apply/update" + id + "&check_status=" + check_status + "&classroom_id=" + classroom,
+    $.getJSON(getbaseurl() + "/manage/apply/update" + id + url,
       function(json)
       {
         if(json.status == 1)

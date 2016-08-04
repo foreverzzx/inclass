@@ -150,6 +150,15 @@
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="row-fluid">
+          <table style="height:30px; margin:auto;" rules= "none" class="table">
+              <tr style="height:60px;">
+                <td>
+                  <button id="passed" style="width:80px; height:25px; margin-top:20px;" type="button" class="btn btn-success">审核通过</button>
+                  <button id="no_passed" style="width:80px; height:25px; margin-top:20px;" type="button" class="btn btn-danger">审核未通过</button>
+                  <button id="no_checked" style="width:80px; height:25px; margin-top:20px;" type="button" class="btn btn-warning">未审核</button>
+                </td>
+              </tr>
+          </table>
           <table id="table" style="margin:auto; text-align:center;" class="table table-striped table-bordered table-hover datatable">
             <thead style="text-align:center;">
               <tr style="height:30px">
@@ -260,7 +269,7 @@
                               $("#last_page").show();
                           }
                           if (json.body.currentPage < json.body.totalPage) {
-                              $("next_page").show();
+                              $("#next_page").show();
                           }
                       }
               });
@@ -305,6 +314,24 @@
           }
         }
     );
+    }
+    else if($(this).attr("id") == "passed")
+    {
+      check_status = 1;
+      grequestPage = 1;
+      read(grequestPage, gpageSize, check_status);
+    }
+    else if($(this).attr("id") == "no_passed")
+    {
+      check_status = 2;
+      grequestPage = 1;
+      read(grequestPage, gpageSize, check_status);
+    }
+    else if($(this).attr("id") == "no_checked")
+    {
+      check_status = 0;
+      grequestPage = 1;
+      read(grequestPage, gpageSize, check_status);
     }
     else {
       var id = $(this).attr("id");
