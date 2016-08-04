@@ -140,7 +140,7 @@
             {
               if(json.body[i] != null)
               {
-                var option = "<option value="+ json.body[i] +">" +json.body[i]+"教</option>"
+                var option = "<option value="+ json.body[i].building +">" + json.body[i].building +"教</option>"
                 $("#building").append(option);
               }
             }
@@ -164,12 +164,14 @@
     var floor = $("#floor").find("option:selected").val();
     gcondition = building + floor;
     gtype = 1;
+    grequestPage = 1;
     read(grequestPage, gpageSize, gtype, gcondition);
   });
   $("#search_accurate").click(function(){
     var num = $("#number").val();
     gcondition = num;
     gtype = 2;
+    grequestPage = 1;
     read(grequestPage, gpageSize, gtype, gcondition);
   });
 

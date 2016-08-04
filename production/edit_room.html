@@ -234,8 +234,11 @@
         if (!json.status) {
           $("tr").remove(".one");
           totalPage = json.body.totalPage == null ? 0 : json.body.totalPage;
-          $("#currentPage").html(json.body.currentPage);
-          $("#totalPage").html(totalPage);
+          if(totalPage != 0)
+          {
+            $("#currentPage").html(json.body.currentPage);
+            $("#totalPage").html(totalPage);
+          }
           for (var i = 0; i < json.body.results.length; i++) {
             var result = json.body.results[i];
             var newRow = "<tr style='height:41px' class=" + "one>"
@@ -248,23 +251,29 @@
             $("#table").append(newRow);
             $("#bt" + result.id + "").addClass("btn btn-warning");
           }
-          if (json.body.currentPage == 1) {
-              $("#last_page").hide();
-              if (json.body.totalPage == 1) {
-                  $("#next_page").hide();
-              }
-          } else {
-              $("#last_page").show();
-              if (json.body.currentPage != json.body.totalPage) {
-                  $("#next_page").show();
-              }
-          }
-          if ((json.body.currentPage == json.body.totalPage) && (json.body.currentPage != 1)) {
-              $("#next_page").hide();
-              $("#last_page").show();
-          }
-          if (json.body.currentPage < json.body.totalPage) {
-              $("#next_page").show();
+          if(totalPage != 0)
+          {
+            if (json.body.currentPage == 1) {
+                $("#last_page").hide();
+                if (json.body.totalPage == 1) {
+                    $("#next_page").hide();
+                }
+            } else {
+                $("#last_page").show();
+                if (json.body.currentPage != json.body.totalPage) {
+                    $("#next_page").show();
+                }
+            }
+            if ((json.body.currentPage == json.body.totalPage) && (json.body.currentPage != 1)) {
+                $("#next_page").hide();
+                $("#last_page").show();
+            }
+            if (json.body.currentPage < json.body.totalPage) {
+                $("#next_page").show();
+            }
+          }else{
+            $("#next_page").hide();
+            $("#last_page").hide();
           }
         }
       });
@@ -275,22 +284,22 @@
   $(document).ready(function() {
       read(grequestPage, gpageSize, gtype, gcondition);
       //alert("第一种方法。");
-      $.getJSON(getbaseurl() + "/manage/classroom/getbuildings",
-        function(json)
-        {
-          if(json.status == 0)
-          {
-            for(var i = 0; i < json.body.length; i++)
-            {
-              if(json.body[i] != null)
-              {
-                var option = "<option value="+ json.body[i] +">" +json.body[i]+"教</option>"
-                $("#building").append(option);
-              }
-            }
-          }
-        }
-    );
+    //   $.getJSON(getbaseurl() + "/manage/classroom/getbuildings",
+    //     function(json)
+    //     {
+    //       if(json.status == 0)
+    //       {
+    //         for(var i = 0; i < json.body.length; i++)
+    //         {
+    //           if(json.body[i] != null)
+    //           {
+    //             var option = "<option value="+ json.body[i] +">" +json.body[i]+"教</option>"
+    //             $("#building").append(option);
+    //           }
+    //         }
+    //       }
+    //     }
+    // );
   });
 
   //翻页
