@@ -3,6 +3,7 @@
    //查找类型，0,1,2,若为3，则查找全部
   var gtype = 3;
   var gcondition = '';var tt;
+  var btn_status;
     function read()
     {
 //    	alert();
@@ -66,7 +67,7 @@
                   + control
                   //+"<td>" + "<img id=" + img_off_id  + " src=" + img_src_off + " />"
                   //+ "<img style='display:none' id=" + img_on_id  + " src=" + img_on + " />" + "</td>"
-                  + "<td>" + "<button id = " + result.id + ">"
+                  + "<td>" + "<button id = " + result.id + " name=" + result.mode + ">"
                   + button_content + "</button></td>"
                   + "</tr>";
                 $("#table").append(newRow);
@@ -83,7 +84,7 @@
                 //  + control
                   //+"<td>" + "<img id=" + img_off_id  + " src=" + img_src_off + " />"
                   //+ "<img style='display:none' id=" + img_on_id  + " src=" + img_on + " />" + "</td>"
-                  + "<td>" + "<button id = " + result.id + ">"
+                  + "<td>" + "<button id = " + result.id + " name=" + result.mode + ">"
                   + button_content + "</button>"
                   + "</tr>";
                 $("#table").append(newRow);
@@ -192,30 +193,34 @@
     $("body").on('click', 'button', function(){
       var id = $(this).attr("id");
       //alert($(this).text());
-      var text = $(this).text();
-      if (text == "关闭") {
-        $(this).text("开启");
-        $(this).removeClass();
-        $(this).addClass("btn btn-success");
-        var status = 0;
-        $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
-          function(json)
-          {
-            alert(json.status);
-          });
-          read(grequestPage, gpageSize, gtype, gcondition);
-      }
-      if (text == "开启") {
-        $(this).text("关闭");
-        $(this).removeClass();
-        $(this).addClass("btn btn-warning");
-        var status = 1;
-        $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
-          function(json)
-          {
-            alert(json.status);
-          });
-          read(grequestPage, gpageSize, gtype, gcondition);
+      var name = $(this).attr("name");
+      if(name == 1)
+      {
+        var text = $(this).text();
+        if (text == "关闭") {
+          $(this).text("开启");
+          $(this).removeClass();
+          $(this).addClass("btn btn-success");
+          var status = 0;
+          $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
+            function(json)
+            {
+              alert(json.status);
+            });
+            read(grequestPage, gpageSize, gtype, gcondition);
+        }
+        if (text == "开启") {
+          $(this).text("关闭");
+          $(this).removeClass();
+          $(this).addClass("btn btn-warning");
+          var status = 1;
+          $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
+            function(json)
+            {
+              alert(json.status);
+            });
+            read(grequestPage, gpageSize, gtype, gcondition);
+        }
       }
     });
     NProgress.done();
