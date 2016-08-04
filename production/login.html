@@ -145,14 +145,7 @@
                                         <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
                                         <span style="margin-left:8px;">or</span>  
                                     </div>
-                                </div>
-                                
-                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                                    
-                                    <!--<div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                                    </div>                                             -->
-                                </div>      
+                                </div>     
                             </form>
                          </div>
                     </div>      
@@ -161,11 +154,7 @@
 </body>
 <script src="js/common.js"></script>
 <script>
-//   function getbaseurl() {
-//   //	return "http://localhost:8080/sist/";
-//   return "http://www.in-class.cn/inclass";
-// //  return "http://localhost:8080/inclass";
-// }
+ 
   var login_name = $("#login_name").val();
   var password = $("#password").val();
   $("#login").click(function(){
@@ -175,6 +164,8 @@
         if(json.status != 0)
         {
           alert("登录失败");
+        }else{
+          window.location.href="index.html";
         }
       }
     );
