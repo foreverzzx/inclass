@@ -308,9 +308,9 @@
     }
     else {
       var id = $(this).attr("id");
-      // document.cookie = id;
-      // alert(document.cookie);
-      window.location.href="check_apply.html?id=" + id;
+      if(id.indexOf('page')==-1){
+      	window.location.href="check_apply.html?id=" + id;
+      }
     }
   });
 </script>

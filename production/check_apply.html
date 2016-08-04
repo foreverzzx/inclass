@@ -349,6 +349,12 @@
           add_basic("#endTime", endTime);
           //alert(resp.body.appendixAddr);
           add_pic_src("#appendixAddr", resp.body.appendixAddr);
+          console.log(resp.body.checkStatus);
+          if(resp.body.checkStatus == 1){
+				$('#pass').attr('checked','chekced');
+				$("#room").show();
+				$("#classroom_id").val(resp.body.classroomId);
+          }
         }
     });
     $("#expansion").click();
@@ -385,12 +391,19 @@
     }
     //alert(check_status);
     //alert(classroom);
-    $.getJSON(getbaseurl() + "/api/apply/get?id=" + id + "&check_status=" + check_status + "&classroom_id=" + classroom,
+    console.log(id);
+    $.getJSON(getbaseurl() + "/manage/apply/update" + id + "&check_status=" + check_status + "&classroom_id=" + classroom,
       function(json)
       {
-        if(json.status)
+        if(json.status == 1)
         {
           alert("提交失败");
+        }
+        else
+        {
+        	if(confirm('修改成功，即将跳转，是否继续?')){
+        		window.location.href='../production/new_apply.html';
+        	}
         }
       }
     );
