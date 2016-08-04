@@ -256,8 +256,11 @@
                   if (!json.status) {
                       $("tr").remove(".one");
                       totalPage = json.body.totalPage == null ? 0 : json.body.totalPage;
-                      $("#currentPage").html(json.body.currentPage);
-                      $("#totalPage").html(totalPage);
+                      if(totalPage != 0)
+                      {
+                        $("#currentPage").html(json.body.currentPage);
+                        $("#totalPage").html(totalPage);
+                      }
                       var num = 1;
                       for (var i = 0; i < json.body.results.length; i++) {
                           for (var j = 0; j < json.body.results[i].lights.length; j++) {

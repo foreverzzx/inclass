@@ -3,6 +3,7 @@
    //查找类型，0,1,2,若为3，则查找全部
   var gtype = 3;
   var gcondition = '';var tt;
+  var btn_status;
     function read()
     {
 //    	alert();
@@ -12,8 +13,11 @@
         if (!json.status) {
           $("tr").remove(".one");
           totalPage = json.body.totalPage == null ? 0 : json.body.totalPage;
-          $("#currentPage").html(json.body.currentPage);
-          $("#totalPage").html(totalPage);
+          if(totalPage != 0)
+          {
+            $("#currentPage").html(json.body.currentPage);
+            $("#totalPage").html(totalPage);
+          }
           var light_color;
           var status;
           var img_off = "images/off.png";
@@ -30,13 +34,19 @@
               var light_mode_on = "on" + result.id;
               var button_content = result.status == 0 ? "开启" : "关闭";
               var control;
+              var btn_content;
               if (result.mode == 1) {
                 control = "<td rowspan=" + rowspan + ">" + "<img id=" + light_mode_on  + " src=" + img_on + " />"
                 + "<img style='display:none' id=" + light_mode_off  + " src=" + img_off + " />" + "</td>";
+                btn_content = "<td>" + "<button id = " + result.id + " name=" + result.mode + ">"
+                  + button_content + "</button></td>";
+
               }
               if (result.mode == 0) {
                 control = "<td rowspan=" + rowspan + ">" + "<img id=" + light_mode_off + " src=" + img_off + " />"
-                + "<img style='display:none' id=" + light_mode_on  + " src=" + img_on + " />" + "</td>"
+                + "<img style='display:none' id=" + light_mode_on  + " src=" + img_on + " />" + "</td>";
+                btn_content = "<td>" + "<button id = " + result.id + " disabled='disabled'>"
+                  + button_content + "</button></td>";
               }
 
               if(result.status == 0)
@@ -66,8 +76,7 @@
                   + control
                   //+"<td>" + "<img id=" + img_off_id  + " src=" + img_src_off + " />"
                   //+ "<img style='display:none' id=" + img_on_id  + " src=" + img_on + " />" + "</td>"
-                  + "<td>" + "<button id = " + result.id + ">"
-                  + button_content + "</button></td>"
+                  + btn_content
                   + "</tr>";
                 $("#table").append(newRow);
                 $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-success" : "btn btn-warning");
@@ -83,8 +92,7 @@
                 //  + control
                   //+"<td>" + "<img id=" + img_off_id  + " src=" + img_src_off + " />"
                   //+ "<img style='display:none' id=" + img_on_id  + " src=" + img_on + " />" + "</td>"
-                  + "<td>" + "<button id = " + result.id + ">"
-                  + button_content + "</button>"
+                  + btn_content
                   + "</tr>";
                 $("#table").append(newRow);
                 $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-success" : "btn btn-warning");
@@ -94,25 +102,31 @@
             }
           }
           //  result.status == 0 ? button_success : button_waring;
-          if (json.body.currentPage == 1) {
-              $("#last_page").hide();
-              if (json.body.totalPage == 1) {
-                  $("#next_page").hide();
-              }
-          } else {
-              $("#last_page").show();
-              if (json.body.currentPage != json.body.totalPage) {
-                  $("#next_page").show();
-              }
+          if(totalPage != 0)
+          {
+            if (json.body.currentPage == 1) {
+                $("#last_page").hide();
+                if (json.body.totalPage == 1) {
+                    $("#next_page").hide();
+                }
+            } else {
+                $("#last_page").show();
+                if (json.body.currentPage != json.body.totalPage) {
+                    $("#next_page").show();
+                }
+            }
+            if ((json.body.currentPage == json.body.totalPage) && (json.body.currentPage != 1)) {
+                $("#next_page").hide();
+                $("#last_page").show();
+            }
+            if (json.body.currentPage < json.body.totalPage) {
+                $("#next_page").show();
+            }
+          }else{
+            $("#last_page").hide();
+            $("#next_page").hide();
           }
-          if ((json.body.currentPage == json.body.totalPage) && (json.body.currentPage != 1)) {
-              $("#next_page").hide();
-              $("#last_page").show();
-          }
-          if (json.body.currentPage < json.body.totalPage) {
-              $("#next_page").show();
-          }
-          }
+        }
         });
     }
   $(document).ready(function() {
@@ -192,31 +206,32 @@
     $("body").on('click', 'button', function(){
       var id = $(this).attr("id");
       //alert($(this).text());
-      var text = $(this).text();
-      if (text == "关闭") {
-        $(this).text("开启");
-        $(this).removeClass();
-        $(this).addClass("btn btn-success");
-        var status = 0;
-        $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
-          function(json)
-          {
-            alert(json.status);
-          });
-          read(grequestPage, gpageSize, gtype, gcondition);
-      }
-      if (text == "开启") {
-        $(this).text("关闭");
-        $(this).removeClass();
-        $(this).addClass("btn btn-warning");
-        var status = 1;
-        $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
-          function(json)
-          {
-            alert(json.status);
-          });
-          read(grequestPage, gpageSize, gtype, gcondition);
-      }
+      var name = $(this).attr("name");
+        var text = $(this).text();
+        if (text == "关闭") {
+          $(this).text("开启");
+          $(this).removeClass();
+          $(this).addClass("btn btn-success");
+          var status = 0;
+          $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
+            function(json)
+            {
+              alert(json.status);
+            });
+            read(grequestPage, gpageSize, gtype, gcondition);
+        }
+        if (text == "开启") {
+          $(this).text("关闭");
+          $(this).removeClass();
+          $(this).addClass("btn btn-warning");
+          var status = 1;
+          $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
+            function(json)
+            {
+              alert(json.status);
+            });
+            read(grequestPage, gpageSize, gtype, gcondition);
+        }
     });
     NProgress.done();
   
