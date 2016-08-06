@@ -313,22 +313,6 @@
   $(document).ready(function() {
       read(grequestPage, gpageSize, gtype, gcondition);
       //alert("第一种方法。");
-      $.getJSON(getbaseurl() + "/manage/classroom/getbuildings",
-        function(json)
-        {
-          if(json.status == 0)
-          {
-            for(var i = 0; i < json.body.length; i++)
-            {
-              if(json.body[i] != null)
-              {
-                var option = "<option value="+ json.body[i] +">" +json.body[i]+"教</option>"
-                $("#building").append(option);
-              }
-            }
-          }
-        }
-    );
   });
 
   //翻页

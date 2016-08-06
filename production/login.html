@@ -20,7 +20,7 @@
 
   <!-- Custom styling plus plugins -->
   <link href="css/custom.css" rel="stylesheet">
-  <link href="css/icheck/flat/green.css" rel="stylesheet">
+  <!--<link href="css/icheck/flat/green.css" rel="stylesheet">-->
 
 
   <script src="js/jquery.min.js"></script>
@@ -39,82 +39,59 @@
 
 <body style="background:#F7F7F7;">
 
-  <div class="">
-    <a class="hiddenanchor" id="toregister"></a>
-    <a class="hiddenanchor" id="tologin"></a>
+      <div class="container">    
+        <div id="loginbox" style="margin-left:32%; margin-top:10%; width:500px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">登录</div>
+                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">忘记密码?</a></div>
+                    </div>     
 
-    <div id="wrapper">
-      <div id="login" class="animate form">
-        <section class="login_content">
-          <form>
-            <h1>Login Form</h1>
-            <div>
-              <input type="text" class="form-control" placeholder="Username" required="" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Password" required="" />
-            </div>
-            <div>
-              <a class="btn btn-default submit" href="index.html">Log in</a>
-              <a class="reset_pass" href="#">Lost your password?</a>
-            </div>
-            <div class="clearfix"></div>
-            <div class="separator">
+                    <div style="padding-top:30px" class="panel-body" >
 
-              <p class="change_link">New to site?
-                <a href="#toregister" class="to_register"> Create Account </a>
-              </p>
-              <div class="clearfix"></div>
-              <br />
-              <div>
-                <h1><i class="fa fa-paw" style="font-size: 26px;"></i> Gentelella Alela!</h1>
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                                    
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login_name" type="text" class="form-control"  value="" placeholder="username">                                        
+                                    </div>
+                                
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="password" type="password" class="form-control" placeholder="password">
+                                    </div>
+                                    
 
-                <p>©2015 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-              </div>
-            </div>
-          </form>
-          <!-- form -->
-        </section>
-        <!-- content -->
+                                
+                            <div class="input-group">
+                                      <div class="checkbox">
+                                        <label>
+                                          <input id="login-remember" type="checkbox" name="remember" value="1"> 记住密码
+                                        </label>
+                                        <button style="margin-left:100px; width:50px;" id="login" class="btn btn-primary">登录</button>
+                                    </div>
+                            </div>
+                    </div>                                    
+               </div>  
+        </div>
       </div>
-      <div id="register" class="animate form">
-        <section class="login_content">
-          <form>
-            <h1>Create Account</h1>
-            <div>
-              <input type="text" class="form-control" placeholder="Username" required="" />
-            </div>
-            <div>
-              <input type="email" class="form-control" placeholder="Email" required="" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Password" required="" />
-            </div>
-            <div>
-              <a class="btn btn-default submit" href="index.html">Submit</a>
-            </div>
-            <div class="clearfix"></div>
-            <div class="separator">
-
-              <p class="change_link">Already a member ?
-                <a href="#tologin" class="to_register"> Log in </a>
-              </p>
-              <div class="clearfix"></div>
-              <br />
-              <div>
-                <h1><i class="fa fa-paw" style="font-size: 26px;"></i> Gentelella Alela!</h1>
-
-                <p>©2015 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-              </div>
-            </div>
-          </form>
-          <!-- form -->
-        </section>
-        <!-- content -->
-      </div>
-    </div>
-  </div>
-
 </body>
-
+<script src="js/common.js"></script>
+<script>
+  $("#login").click(function(){
+    var login_name = $("#login_name").val();
+    var password = $("#password").val();
+    $.getJSON(getbaseurl() + "/api/admin/login?login_name=" + login_name + "&password=" + password,
+      function(json)
+      {
+        if(json.status != 0)
+        {
+          alert("登录失败");
+        }else{
+          window.location.href="index.html";
+        }
+      }
+    );
+  });
+</script>
 </html>

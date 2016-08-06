@@ -1,4 +1,4 @@
-  var grequestPage = 1;//请求页
+﻿  var grequestPage = 1;//请求页
   var gpageSize = 10;//一次页面显示数量--默认十不修改
    //查找类型，0,1,2,若为3，则查找全部
   var gtype = 3;
@@ -17,6 +17,9 @@
           {
             $("#currentPage").html(json.body.currentPage);
             $("#totalPage").html(totalPage);
+          }else{
+            $("#currentPage").html("");
+            $("#totalPage").html("");
           }
           var light_color;
           var status;
@@ -79,7 +82,7 @@
                   + btn_content
                   + "</tr>";
                 $("#table").append(newRow);
-                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-success" : "btn btn-warning");
+                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-primary" : "btn btn-warning");
                num++;
               }
               else {
@@ -95,7 +98,7 @@
                   + btn_content
                   + "</tr>";
                 $("#table").append(newRow);
-                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-success" : "btn btn-warning");
+                $("#"+ result.id +"").addClass(result.status == 0 ? "btn btn-primary" : "btn btn-warning");
                 num++;
               }
               // num++;
@@ -141,6 +144,7 @@
               if(json.body[i] != null)
               {
                 var option = "<option value="+ json.body[i].building +">" +json.body[i].building+"教</option>"
+
                 $("#building").append(option);
               }
             }
@@ -164,12 +168,14 @@
     var floor = $("#floor").find("option:selected").val();
     gcondition = building + floor;
     gtype = 1;
+    grequestPage = 1;
     read(grequestPage, gpageSize, gtype, gcondition);
   });
   $("#search_accurate").click(function(){
     var num = $("#number").val();
     gcondition = num;
     gtype = 2;
+    grequestPage = 1;
     read(grequestPage, gpageSize, gtype, gcondition);
   });
 
