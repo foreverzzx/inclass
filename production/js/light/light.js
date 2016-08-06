@@ -36,16 +36,16 @@
               var control;
               var btn_content;
               if (result.mode == 1) {
-                control = "<td rowspan=" + rowspan + ">" + "<img id=" + light_mode_on  + " src=" + img_on + " />"
+                control = "<td rowspan=" + rowspan + ">" + "<img id=" + light_mode_on  + " src=" + img_on + " onmousedown='mousedown()' onmouseup='mouseup()'/>"
                 + "<img style='display:none' id=" + light_mode_off  + " src=" + img_off + " />" + "</td>";
-                btn_content = "<td>" + "<button id = " + result.id + " name=" + result.mode + ">"
+                btn_content = "<td>" + "<button onmousedown='mousedown()' onmouseup='mouseup()' id = " + result.id + " name=" + result.mode + ">"
                   + button_content + "</button></td>";
 
               }
               if (result.mode == 0) {
-                control = "<td rowspan=" + rowspan + ">" + "<img id=" + light_mode_off + " src=" + img_off + " />"
+                control = "<td rowspan=" + rowspan + ">" + "<img id=" + light_mode_off + " src=" + img_off + " onmousedown='mousedown()' onmouseup='mouseup()' />"
                 + "<img style='display:none' id=" + light_mode_on  + " src=" + img_on + " />" + "</td>";
-                btn_content = "<td>" + "<button id = " + result.id + " disabled='disabled'>"
+                btn_content = "<td>" + "<button id = " + result.id + " disabled='disabled' onmousedown='mousedown()' onmouseup='mouseup()'>"
                   + button_content + "</button></td>";
               }
 
@@ -178,30 +178,30 @@
 	    var id = $(this).attr("id");
 	    if (id.substring(0,2) == "on")
 	    {
-	      $(this).hide();
+	      /*$(this).hide();*/
 	      //alert(id.substring(2));
-	      $("#off" + id.substring(2) + "").show();
+	     /* $("#off" + id.substring(2) + "").show();*/
 	      var mode = 0;
 	      $.getJSON(getbaseurl()+"/api/light/updatemode?classroom_id=" + id.substring(2,6) + "&mode=" + mode,
 	        function(json)
 	        {
 	          //alert(json.status);
 	        });
-	        read(grequestPage, gpageSize, gtype, gcondition);
+	        //read(grequestPage, gpageSize, gtype, gcondition);
 	    }
 	      if(id.substring(0,3) == "off")
 	      {
-	        $(this).hide();
-	        $("#on" + id.substring(3) + "").show();
+	       /* $(this).hide();
+	        $("#on" + id.substring(3) + "").show();*/
 	        var mode = 1;
 	        $.getJSON(getbaseurl()+"/api/light/updatemode?classroom_id=" + id.substring(3,7) + "&mode=" + mode,
 	          function(json)
 	          {
 	            //alert(json.status);
 	          });
-	          read(grequestPage, gpageSize, gtype, gcondition);
+	          //read(grequestPage, gpageSize, gtype, gcondition);
 	      }
-
+	      tt = window.setInterval("read()",2000);
     });
     $("body").on('click', 'button', function(){
       var id = $(this).attr("id");
@@ -209,31 +209,39 @@
       var name = $(this).attr("name");
         var text = $(this).text();
         if (text == "关闭") {
-          $(this).text("开启");
+/*          $(this).text("开启");
           $(this).removeClass();
-          $(this).addClass("btn btn-success");
+          $(this).addClass("btn btn-success");*/
           var status = 0;
           $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
             function(json)
             {
-              alert(json.status);
+//              alert(json.status);
             });
-            read(grequestPage, gpageSize, gtype, gcondition);
+            //read(grequestPage, gpageSize, gtype, gcondition);
         }
         if (text == "开启") {
-          $(this).text("关闭");
-          $(this).removeClass();
-          $(this).addClass("btn btn-warning");
+//          $(this).text("关闭");
+//          $(this).removeClass();
+//          $(this).addClass("btn btn-warning");
           var status = 1;
           $.getJSON(getbaseurl()+"/api/light/updatestatus?id=" + id + "&status=" + status,
             function(json)
             {
-              alert(json.status);
+//              alert(json.status);
             });
-            read(grequestPage, gpageSize, gtype, gcondition);
+            //read(grequestPage, gpageSize, gtype, gcondition);
         }
+        tt = window.setInterval("read()",2000);
     });
     NProgress.done();
   
-//  tt = window.setInterval("read()",2000);
-  
+  tt = window.setInterval("read()",2000);
+ 
+    function mousedown(){
+    	console.log('mousedown');
+    	window.clearInterval(tt);
+    };
+    function mouseup(){
+    	console.log('mouseup');
+    };
